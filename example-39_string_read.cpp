@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <libakrypt-base.h>
 #include <libakrypt.h>
+
+/*Пример чтения строки текста из потока ввода*/
+
 int main(){
     /*char string[256];
     size_t len = 256;
