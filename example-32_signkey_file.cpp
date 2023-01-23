@@ -16,29 +16,29 @@ int main(int argc, char ** argv) {
     
     ak_log_set_level(ak_log_maximum);
 
-    // создаем генератор псевдослучайных последовательностей
+    // СЃРѕР·РґР°РµРј РіРµРЅРµСЂР°С‚РѕСЂ РїСЃРµРІРґРѕ-СЃРѕСѓС‡Р°Р№РЅС‹С… РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚РµР№
     if(ak_random_create_lcg(&generator) != ak_error_ok)
         return ak_error_get_value();
 
-    // инициализируем секретный ключ с заданной эллиптической кривой
+    // РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј СЃРµРєСЂРµС‚РЅС‹Р№ РєР»СЋС‡, Р·Р°РґР°РЅРЅС‹Р№ СЌР»Р»РёРїС‚РёС‡РµСЃРєРѕР№ РєСЂРёРІРѕР№
     if (ak_signkey_create_str(&sk, "cspa") != ak_error_ok)
         return ak_error_get_value();    
 
-    // устанавливаем значение ключа
+    // СѓСЃС‚Р°РЅРѕРІРєР° Р·РЅР°С‡РµРЅРёСЏ РєР»СЋС‡Р°
     if(ak_signkey_set_key(&sk, testkey, sizeof(testkey)) != ak_error_ok)
         return ak_error_get_value();
 
-    // подстраиваем ключ и устанавливаем ресурс
+    //РїРѕРґСЃС‚СЂР°РёРІР°РµРј РєР»СЋС‡ Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј СЂРµСЃСѓСЂСЃ
     ak_skey_set_resource_values(&sk.key, key_using_resource,
         "digital_signature_count_resource", 0, time(NULL) + 2592000);
 
-    // только теперь подписываем данные в качестве которых выступает исполняемый файл
+    // РїРѕРґРїРёСЃС‹РІР°РµРј РґР°РЅРЅС‹Рµ, РІ РєР°С‡РµСЃС‚РІРµ РєРѕС‚РѕСЂС‹С… РІС‹СЃС‚СѓРїР°РµС‚ РёСЃРїРѕР»РЅСЏРµРјС‹Р№ С„Р°Р№Р»
     ak_signkey_sign_file(&sk, &generator, argv[0], sign, sizeof(sign));
     printf("file:   %s\nsign:   %s\n", argv[0], ak_ptr_to_hexstr(sign, ak_signkey_get_tag_size(&sk), ak_false));
 
-    // формируем открытый ключ
+    // С„РѕСЂРјРёСЂСѓРµРј РѕС‚РєСЂС‹С‚С‹Р№ РєР»СЋС‡
     ak_verifykey_create_from_signkey(&pk, &sk);
-    // проверяем подпись
+    // РїСЂРѕРІРµСЂСЏРµРј РїРѕРґРїРёСЃСЊ
     if (ak_verifykey_verify_file(&pk, argv[0], sign) == ak_true)
         printf("verify: Ok\n");
     else { 
