@@ -3,6 +3,8 @@
 #include <libakrypt.h>
 #include <libakrypt-base.h>
 
+/*Пример проверки электронной подписи*/
+
 int main() {
     struct signkey sk;
     struct random generator;
