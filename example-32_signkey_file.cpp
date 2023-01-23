@@ -3,6 +3,8 @@
 #include <libakrypt.h>
 #include <libakrypt-base.h>
 
+/*Пример использования электронной подписи для файлов*/
+
 int main(int argc, char ** argv) {
     struct signkey sk;
     struct verifykey pk;
