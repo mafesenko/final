@@ -3,6 +3,8 @@
 #include <libakrypt.h>
 #include <libakrypt-base.h>
 
+/*Использование генератора случайных (псевдослучайных чисел)*/
+
 int main(){
     struct random rnd;
     ak_uint8 buf[12];
