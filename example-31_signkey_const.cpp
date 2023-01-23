@@ -3,6 +3,8 @@
 #include <libakrypt.h>
 #include <libakrypt-base.h>
 
+/*Пример использования жлектронной подписи для константных значений*/
+
 int main() {
     struct signkey sk;
     struct random generator;
